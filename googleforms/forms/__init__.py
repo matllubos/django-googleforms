@@ -221,8 +221,8 @@ class GoogleForm(object):
     }
     
     
-    def __init__(self, value, data=None, files=None, initial=None):
-        self.value = value
+    def __init__(self, code, data=None, files=None, initial=None):
+        self.code = code
         self.data = data
         self.response = self._get()
         
@@ -286,7 +286,7 @@ class GoogleForm(object):
         conn = httplib.HTTPSConnection("docs.google.com")
         headers = {'Accept-Language': '%s;q=0.8' % translation.get_language()}
 
-        conn.request("GET", "/spreadsheet/viewform?formkey=%s#gid=0" % self.value, headers=headers)
+        conn.request("GET", "/spreadsheet/viewform?formkey=%s#gid=0" % self.code, headers=headers)
         response = conn.getresponse()
         html = response.read()
         conn.close()
