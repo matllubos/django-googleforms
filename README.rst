@@ -66,6 +66,7 @@ from the original-google-form is removed submit button.
 Default fields:
 ---------------
 field classes is selected from dictionary which you can overload. Default dictionary is here::
+	
 	fields_class = {
 	       'ss-scale':          ScaleField,
 	       'ss-paragraph-text': TextareaField,
