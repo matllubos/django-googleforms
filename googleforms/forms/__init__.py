@@ -220,7 +220,8 @@ class GoogleForm(object):
        'ss-grid':           GridField
     }
     
-    
+    fields_class = {}
+       
     def __init__(self, code, data=None, files=None, initial=None):
         self.code = code
         self.data = data
