@@ -294,10 +294,19 @@ class GoogleForm(object):
         html = html.decode("utf-8")
         return re.sub(u'\n', u'', unicode(html))
 
+    
+    def _endode_data(self, data):
+        encoded_data = {}
+        for k, v in data.items():
+            encoded_data_val = []
+            for val in v:
+                encoded_data_val.append(val.encode('utf-8'))
+            encoded_data[k] = encoded_data_val
+        return encoded_data
 
     def _post(self):
         data = dict(self.data.copy())
-        params =  urllib.urlencode(dict([k, v.encode('utf-8')] for k, v in data.items()), doseq=True)
+        params =  urllib.urlencode(self._endode_data(data), doseq=True)
         headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain", 'Accept-Language': '%s;q=0.5' % translation.get_language()}
 
         conn = httplib.HTTPSConnection("docs.google.com")
