@@ -203,17 +203,6 @@ class GridField(Field):
                 input['checked'] = 'checked'
 
 
-def encoded_dict(in_dict):
-    out_dict = {}
-    for k, v in in_dict.iteritems():
-        if isinstance(v, unicode):
-            v = v.encode('utf8')
-        elif isinstance(v, str):
-            # Must be encoded in UTF-8
-            v.decode('utf8')
-        out_dict[k] = v
-    return out_dict                           
-    
 class GoogleForm(object):
     
     post_response = None
@@ -307,8 +296,8 @@ class GoogleForm(object):
 
 
     def _post(self):
-        data = self.data.copy()
-        params =  urllib.urlencode(encoded_dict(dict(self.data.copy())), doseq=True)
+        data = dict(self.data.copy())
+        params =  urllib.urlencode(dict([k, v.encode('utf-8')] for k, v in data.items()), doseq=True)
         headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain", 'Accept-Language': '%s;q=0.5' % translation.get_language()}
 
         conn = httplib.HTTPSConnection("docs.google.com")
