@@ -97,6 +97,8 @@ class Field(object):
     
     @property
     def first_name(self):
+        if not self.names:
+            return ''
         return self.names[0]
      
     def _set_attrs(self, attrs):
