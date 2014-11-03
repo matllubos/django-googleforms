@@ -252,19 +252,21 @@ class GoogleForm(object):
             return
 
 
-        label = entry.find('div', { "class" : "ss-q-title" })
-
-
-        if label.span:
-            label.span.replaceWith('')
-        if label:
-            label_text = ' '.join([unicode(tag) for tag in label.contents])
-        label.replaceWith('')
+        title_label = entry.find('div', { "class" : "ss-q-title" })
+        if title_label.span:
+            title_label.span.replaceWith('')
+        if title_label:
+            label_text = ' '.join([unicode(tag) for tag in title_label.contents])
+        title_label.replaceWith('')
 
         help_label = entry.find('div', { "class" : "ss-q-help" })
         if help_label:
             help_text = ' '.join([unicode(tag) for tag in help_label.contents])
         help_label.replaceWith('')
+
+        label = entry.find('label', { "class" : "ss-q-item-label" })
+        if label:
+            label.replaceWith('')
 
         type = entry.parent['class'][-1]
         html = entry
