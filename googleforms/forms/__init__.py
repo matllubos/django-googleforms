@@ -17,7 +17,7 @@ from django.utils.encoding import force_unicode
 
 class GoogleSpreadsheetField(forms.CharField):
     def clean(self, value):
-        value = re.sub(r'^.*\?key=([^&#"]*).*$', r'\g<1>', value)
+        value = re.sub(r'^.*/spreadsheets/d/([^/]*)/.*', r'\g<1>', value)
         return super(GoogleSpreadsheetField, self).clean(value)
 
 
@@ -250,7 +250,6 @@ class GoogleForm(object):
 
         if self.remove_submit and u'ss-navigate' in entry.parent['class']:
             return
-
 
         title_label = entry.find('div', { "class" : "ss-q-title" })
         if title_label.span:

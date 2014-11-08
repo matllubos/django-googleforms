@@ -11,7 +11,7 @@ class GoogleSpreadsheet(unicode):
 
     @property
     def spreadsheet_hyperlink(self):
-        return u'https://docs.google.com/spreadsheet/ccc?key=%s#gid=0' % self.value
+        return u'https://docs.google.com/spreadsheets/d/%s/edit' % self.value
 
     def __unicode__(self):
         return "%s" % (self.value,)
